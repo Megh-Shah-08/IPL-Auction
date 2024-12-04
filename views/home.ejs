@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IPL MOCK AUCTION!</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 20px 0;
+      color: #333;
+    }
+
+    #container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px; /* Space between cards */
+      width: 100%; /* Ensure container takes full width */
+      align-items: center;
+    }
+
+    .card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 90%; /* Cards take 90% of the screen width */
+      max-width: 400px; /* Limit the width of the cards */
+      padding: 20px;
+      text-align: center;
+    }
+
+    .card h2 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: #007bff;
+    }
+
+    .card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .card ul li {
+      margin: 10px 0;
+      font-size: 16px;
+      color: #555;
+    }
+
+    .card ul li a {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .card ul li a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 20px;
+      }
+
+      .card h2 {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>IPL MOCK AUCTION 2025!</h1>
+
+  <form action="/login" method="get" style="margin-bottom: 20px;">
+    <button>Login</button>
+  </form>
+
+  <% if (userType === "admin") { %>
+  <a href="/player" style="margin-bottom: 20px;">New Player</a>
+  <% } %>
+
+  <div id="container">
+    <% for (let team of teams) { %>
+    <div class="card">
+      <h2><%= team.name %></h2>
+      <ul>
+        <li>Current Purse: <%= team.purse %> CR</li>
+        <li><a href="/team/<%= team._id %>">Details</a></li>
+      </ul>
+    </div>
+    <% } %>
+  </div>
+</body>
+</html>

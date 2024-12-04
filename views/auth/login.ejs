@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page for IPL Auction</title>
+    <style>
+      /* General body styling */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      /* Container for the form */
+      form {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px 30px;
+        width: 320px;
+        text-align: center;
+      }
+
+      /* Form input styling */
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 14px;
+        color: #333;
+        font-weight: bold;
+        text-align: left;
+      }
+
+      input, select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+        background-color: #f9f9f9;
+      }
+
+      input:focus, select:focus {
+        border-color: #007bff;
+        outline: none;
+      }
+
+      /* Button styling */
+      button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      /* Responsive behavior */
+      @media screen and (max-width: 480px) {
+        form {
+          width: 90%;
+          padding: 15px 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <form action="/login" method="post">
+      <label for="username">Enter the username</label>
+      <input
+        type="text"
+        placeholder="Your name here"
+        id="username"
+        name="username"
+        value="Megh"
+      />
+
+      <label for="usertype">Select the User Category</label>
+      <select name="usertype" id="usertype">
+        <option value="admin">Admin</option>
+        <option value="viewer">Viewer</option>
+      </select>
+
+      <button>Login</button>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Player</title>
+    <style>
+      /* General body styling */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      /* Form container */
+      form {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px 30px;
+        width: 400px;
+        text-align: left;
+      }
+
+      /* Form elements styling */
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #333;
+      }
+
+      input, select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+        background-color: #f9f9f9;
+      }
+
+      input:focus, select:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+      }
+
+      /* Button styling */
+      button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      /* Responsive behavior */
+      @media screen and (max-width: 480px) {
+        form {
+          width: 90%;
+          padding: 15px 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <form action="/player" method="post">
+      <label for="name">Enter the name:</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        placeholder="Name here!"
+        required
+      />
+
+      <label for="base">Enter the base price:</label>
+      <input
+        type="number"
+        step="0.01"
+        id="base"
+        name="basePrice"
+        placeholder="Base Price here!"
+        required
+      />
+
+      <label for="sell">Enter the sell price:</label>
+      <input
+        type="number"
+        step="0.01"
+        id="sell"
+        name="sellPrice"
+        placeholder="Sell Price here!"
+        required
+      />
+
+      <label for="team">Select the team:</label>
+      <select id="team" name="team" required>
+        <option value="CSK">Chennai Super Kings</option>
+        <option value="MI">Mumbai Indians</option>
+        <option value="RCB">Royal Challengers Bangalore</option>
+        <option value="KKR">Kolkata Knight Riders</option>
+        <option value="RR">Rajasthan Royals</option>
+        <option value="DC">Delhi Capitals</option>
+        <option value="PBKS">Punjab Kings</option>
+        <option value="SRH">Sunrisers Hyderabad</option>
+        <option value="LSG">Lucknow Super Giants</option>
+        <option value="GT">Gujarat Titans</option>
+      </select>
+
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>
