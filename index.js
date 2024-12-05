@@ -8,6 +8,7 @@ const Team = require("./models/Team");
 const Player = require("./models/Player");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
+const { console } = require("inspector");
 app.use(methodOverride("_method"));
 let userType = "viewer";
 connectToMongo();
@@ -33,14 +34,14 @@ app.post("/login", async (req, res) => {
   });
   userType = usertype;
   const user = await newUser.save();
-//   console.log(user, userType);
+  console.log(`${newUser.username} : ${newUser.usertype} Logged In!`);
   res.redirect("/");
 });
 
 //GET Request for Home Route
 app.get("/", async (req, res) => {
   const teams = await Team.find();
-//   console.log(teams);
+  //   console.log(teams);
   res.render("home.ejs", { teams, userType });
 });
 
@@ -54,22 +55,23 @@ app.post("/player", async (req, res) => {
     sellPrice: sellPrice,
     team: team,
   });
-  console.log(team);
+  // console.log(team);
 
   const player = await newPlayer.save();
 
   const foundTeam = await Team.findOne({ name: team });
-//   console.log(foundTeam);
+  //   console.log(foundTeam);
   let newPurse = foundTeam.purse - sellPrice;
-//   console.log(foundTeam.purse);
-//   console.log(newPurse);
+  //   console.log(foundTeam.purse);
+  //   console.log(newPurse);
   const teamUpdate = await Team.findByIdAndUpdate(
     foundTeam._id,
     { purse: newPurse },
     { new: true, runValidators: true }
   );
-  console.log(teamUpdate);
+  // console.log(teamUpdate);
   //   res.send(player);
+  console.log(`${player.name} : ${player.sellPrice} : ${player.team} Added!`);
   res.redirect(`/team/${foundTeam._id}`);
 });
 
@@ -77,9 +79,9 @@ app.post("/player", async (req, res) => {
 app.get("/team/:id", async (req, res) => {
   const { id } = req.params;
   const team = await Team.findById(id);
-//   console.log(team);
+  //   console.log(team);
   const players = await Player.find({ team: team.name });
-//   console.log(players);
+  //   console.log(players);
   res.render("team/show.ejs", { team, players, userType });
 });
 
@@ -91,24 +93,29 @@ app.get("/player", async (req, res) => {
 //DELETE Request to delete the player from record
 app.delete("/player/:id/delete", async (req, res) => {
   const { id } = req.params;
-  const playerDeleted =await Player.findByIdAndDelete(id);
-//   console.log('deleted!');
-  console.log(playerDeleted);
+  const playerDeleted = await Player.findByIdAndDelete(id);
+  //   console.log('deleted!');
+  // console.log(playerDeleted);
   const playerPrice = playerDeleted.sellPrice;
   const team = playerDeleted.team;
   const foundTeam = await Team.findOne({ name: team });
   const newPurse = foundTeam.purse + playerPrice;
-  
+
   const teamUpdate = await Team.findByIdAndUpdate(
     foundTeam._id,
     { purse: newPurse },
     { new: true, runValidators: true }
   );
-  console.log(teamUpdate);
+  // console.log(teamUpdate);
   //   res.send(player);
+  console.log(`${playerDeleted.name} Deleted`);
   res.redirect(`/team/${foundTeam._id}`);
 });
 
-app.listen(port, () => {
-  console.log("IPL Auction listening at Port 3000!");
-});
+try {
+  app.listen(port, () => {
+    console.log("IPL Auction listening at Port 3000!");
+  });
+} catch (error) {
+  console.log(error);
+}
