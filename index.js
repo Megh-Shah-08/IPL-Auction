@@ -8,7 +8,6 @@ const Team = require("./models/Team");
 const Player = require("./models/Player");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
-const { console } = require("inspector");
 app.use(methodOverride("_method"));
 let userType = "viewer";
 connectToMongo();
@@ -17,7 +16,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-
 //GET Request to get the form to login
 app.get("/login", async (req, res) => {
   console.log("Login requested");
@@ -111,10 +109,9 @@ app.delete("/player/:id/delete", async (req, res) => {
   console.log(`${playerDeleted.name} Deleted`);
   res.redirect(`/team/${foundTeam._id}`);
 });
-
 try {
   app.listen(port, () => {
-    console.log("IPL Auction listening at Port 3000!");
+    console.log(`IPL Auction listening at Port ${port}!`);
   });
 } catch (error) {
   console.log(error);
