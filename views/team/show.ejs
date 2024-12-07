@@ -7,7 +7,7 @@
     <style>
       body {
         font-family: Arial, sans-serif;
-        background-color: #f9f9f9;
+        background-color: #f4f7fc;
         margin: 0;
         padding: 0;
         display: flex;
@@ -18,26 +18,35 @@
 
       h1 {
         margin-top: 20px;
-        font-size: 32px;
+        font-size: 36px;
         color: #007bff;
+        text-transform: uppercase;
+        text-align: center;
       }
 
-      div {
+      .purse {
         margin: 20px 0;
-        font-size: 18px;
+        font-size: 20px;
         font-weight: bold;
+        color: #555;
+        background: #e9f7ff;
+        padding: 10px 20px;
+        border-radius: 8px;
       }
 
       table {
         border-collapse: collapse;
-        width: 80%;
+        width: 90%;
+        max-width: 1200px;
         margin: 20px 0;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
       }
 
       table th, table td {
-        padding: 12px;
+        padding: 15px;
         text-align: left;
         border: 1px solid #ddd;
       }
@@ -46,6 +55,8 @@
         background-color: #007bff;
         color: white;
         font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
       }
 
       table tr:nth-child(even) {
@@ -54,6 +65,7 @@
 
       table tr:hover {
         background-color: #f1f1f1;
+        cursor: pointer;
       }
 
       button {
@@ -63,6 +75,7 @@
         padding: 8px 12px;
         border-radius: 4px;
         cursor: pointer;
+        font-size: 14px;
       }
 
       button:hover {
@@ -76,44 +89,61 @@
         text-decoration: none;
         font-size: 18px;
         font-weight: bold;
+        padding: 8px 12px;
+        background: #f1f1f1;
+        border: 1px solid #007bff;
+        border-radius: 4px;
+        transition: all 0.3s ease;
       }
 
       a:hover {
-        text-decoration: underline;
+        text-decoration: none;
+        background: #007bff;
+        color: white;
+      }
+
+      .players-header {
+        margin-top: 20px;
+        font-size: 28px;
+        color: #333;
       }
     </style>
   </head>
   <body>
-    <h1>TEAM <%= team.name %></h1>
-    <div>Current Purse : <%= team.purse %> CR</div>
+    <h1>Team <%= team.name %></h1>
+    <div class="purse">Current Purse: <%= team.purse %> CR</div>
 
-    <h2>Players</h2>
+    <h2 class="players-header">Players</h2>
     <table>
-      <tr>
-        <th>Name</th>
-        <th>Base Price</th>
-        <th>Sell Price</th>
-        <% if(userType==='admin'){ %>    
-        <th>Options!</th>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Base Price</th>
+          <th>Sell Price</th>
+          <% if (userType === 'admin') { %>
+          <th>Options</th>
+          <% } %>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (let player of players) { %>
+        <tr>
+          <td><%= player.name %></td>
+          <td><%= player.basePrice %> CR</td>
+          <td><%= player.sellPrice %> CR</td>
+          <% if (userType === 'admin') { %>
+          <td>
+            <form
+              action="/player/<%= player._id %>/delete?_method=DELETE"
+              method="post"
+            >
+              <button>Delete</button>
+            </form>
+          </td>
+          <% } %>
+        </tr>
         <% } %>
-      </tr>
-      <% for(let player of players){ %>
-      <tr>
-        <td><%= player.name %></td>
-        <td><%= player.basePrice %> CR</td>
-        <td><%= player.sellPrice %>CR</td>
-        <% if(userType==='admin'){ %>
-        <td>
-          <form
-            action="/player/<%= player._id %>/delete?_method=DELETE"
-            method="post"
-          >
-            <button>Delete Player</button>
-          </form>
-        </td>
-        <% } %>
-      </tr>
-      <% } %>
+      </tbody>
     </table>
     <a href="/">Back to Homepage</a>
   </body>
