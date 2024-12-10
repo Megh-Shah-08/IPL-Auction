@@ -109,6 +109,24 @@ app.delete("/player/:id/delete", async (req, res) => {
   console.log(`${playerDeleted.name} Deleted`);
   res.redirect(`/team/${foundTeam._id}`);
 });
+
+app.get("/max", async (req, res) => {
+  const players = await Player.aggregate([
+    {
+      $sort: { sellPrice: -1 },
+    },
+    {
+      $group: {
+        _id: "$team",
+        mostExpensivePlayer: { $first: "$name" },
+        highestPrice: { $max: "$sellPrice" },
+      },
+    },
+  ]);
+  // console.log(players);
+  res.render("max", { players });
+});
+
 try {
   app.listen(port, () => {
     console.log(`IPL Auction listening at Port ${port}!`);

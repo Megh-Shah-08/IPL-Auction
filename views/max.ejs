@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Most Expensive Player of each team</title>
+    <style>
+      /* Resetting some default styles */
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      /* Styling the body */
+      body {
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      /* Center the table container */
+      .table-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+      }
+
+      h1 {
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      /* Styling the table */
+      table {
+        width: 80vh; /* Adjust as needed */
+        border-collapse: collapse;
+        margin: 20px 0;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      table th,
+      table td {
+        padding: 12px;
+        text-align: center;
+        border: 1px solid #ddd;
+      }
+
+      table th {
+        background-color: #007bff;
+        color: white;
+      }
+
+      table tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      table tr:hover {
+        background-color: #f1f1f1;
+      }
+
+      /* Styling for better readability */
+      th,
+      td {
+        font-size: 1.1em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="table-container">
+      <h1>Most Expensive Player of each team</h1>
+
+      <table>
+        <tr>
+          <th>Team</th>
+          <th>Most Expensive Player</th>
+          <th>Sell Price</th>
+        </tr>
+
+        <% for (let player of players) { %>
+        <tr>
+          <td><%= player._id %></td>
+          <td><%= player.mostExpensivePlayer %></td>
+          <td><%= player.highestPrice %></td>
+        </tr>
+        <% } %>
+      </table>
+    </div>
+  </body>
+</html>
