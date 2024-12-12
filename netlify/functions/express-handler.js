@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
+app.set("views", path.join(__dirname, "../../views"));
 //GET Request to get the form to login
 app.get("/login", async (req, res) => {
   console.log("Login requested");
