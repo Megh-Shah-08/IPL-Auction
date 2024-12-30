@@ -11,5 +11,5 @@ const player = new Player({
 });
 
 const newPlayer = await player.save();
-//comment to check for  a PR!
+
 console.log(newPlayer);
